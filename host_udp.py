@@ -26,6 +26,7 @@ def reset_ball():
 
 ball_x, ball_y, ball_dx, ball_dy = reset_ball()
 
+#AF_INET indica o uso de IPV4, DGRAM indica o protocolo UDP
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("0.0.0.0", host_port))
 sock.setblocking(False)
@@ -90,8 +91,9 @@ while run:
     if ball_x < 0 or ball_x > WIDTH:
         ball_x, ball_y, ball_dx, ball_dy = reset_ball()
 
-    # Envia estado para client: host_y (int), ball_x (float), ball_y (float)
+    # Envio de estado da posição do host e da bola
     if client_addr:
+        # i ff significa o formato: integer e dois floats
         packet = struct.pack('i ff', host_y, ball_x, ball_y)
         try:
             sock.sendto(packet, client_addr)
