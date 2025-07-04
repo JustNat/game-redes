@@ -3,6 +3,7 @@ import pygame
 import struct
 import threading
 import os
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -15,7 +16,7 @@ win = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
 host_ip = os.getenv('HOST_IP')
-host_port = os.getenv('PORT')
+host_port = int(os.getenv('PORT'))
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.setblocking(False)

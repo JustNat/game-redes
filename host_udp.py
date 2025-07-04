@@ -3,10 +3,11 @@ import threading
 import pygame
 import struct
 import os
+from dotenv import load_dotenv
 
 load_dotenv()
 
-host_port = os.getenv('PORT')
+host_port = int(os.getenv('PORT'))
 
 WIDTH, HEIGHT = 1200, 800
 PADDLE_WIDTH, PADDLE_HEIGHT = 10, 60
