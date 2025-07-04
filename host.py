@@ -32,13 +32,13 @@ def handle_client():
 def start_server():
     global conn
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(('', 5555))
+    server.bind(('0.0.0.0', 5555))
     server.listen(1)
     print("Aguardando cliente...")
     conn, addr = server.accept()
     print("Cliente conectado:", addr)
     threading.Thread(target=handle_client, daemon=True).start()
-
+ 
 start_server()
 
 print('Entrando no menu')
