@@ -2,6 +2,11 @@ import socket
 import threading
 import pygame
 import struct
+import os
+
+load_dotenv()
+
+host_port = os.getenv('PORT')
 
 WIDTH, HEIGHT = 1200, 800
 PADDLE_WIDTH, PADDLE_HEIGHT = 10, 60
@@ -21,7 +26,7 @@ def reset_ball():
 ball_x, ball_y, ball_dx, ball_dy = reset_ball()
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind(("0.0.0.0", 5555))
+sock.bind(("0.0.0.0", host_port))
 sock.setblocking(False)
 
 client_addr = None

@@ -2,6 +2,9 @@ import socket
 import pygame
 import struct
 import threading
+import os
+
+load_dotenv()
 
 WIDTH, HEIGHT = 1200, 800
 PADDLE_WIDTH, PADDLE_HEIGHT = 10, 60
@@ -11,8 +14,8 @@ pygame.init()
 win = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
-host_ip = "192.168.1.42"  # IP do host
-host_port = 5555
+host_ip = os.getenv('HOST_IP')
+host_port = os.getenv('PORT')
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.setblocking(False)
@@ -59,7 +62,6 @@ while run:
     if keys[pygame.K_DOWN] and client_y < HEIGHT - PADDLE_HEIGHT:
         client_y += 5
 
-    # Envia posição paddle para host (int)
     packet = struct.pack('i', client_y)
     try:
         sock.sendto(packet, (host_ip, host_port))
